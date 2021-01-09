@@ -3,11 +3,11 @@ os: linux
 
 install:
   - pip install -r requirements.txt
-  # - pip install coveralls
+  - pip install coveralls
 
 script:
   - python -V
-  - pylint --load-plugins pylint_django --disable=missing-docstring ./whattowatch
+  - pylint --load-plugins pylint_django --disable=missing-docstring ./whattowatch/whattowatch
     # Run tests
   # - coverage run --source=watch manage.py test
 
