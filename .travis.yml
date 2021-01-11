@@ -8,9 +8,12 @@ install:
 script:
   - python -V
   - pylint --load-plugins pylint_django --disable=missing-docstring ./whattowatch/whattowatch
+  # - pylint --load-plugins pylint_django --disable=missing-docstring ./whattowatch/watchApp
+  # - pylint --load-plugins pylint_django --disable=missing-docstring ./whattowatch/chatApp
+
     # Run tests
   - coverage run --source='.' whattowatch/manage.py test whattowatch
-  # - coverage run --source='.' whattowatch/manage.py test watchApp
+  #- coverage run --source='.' whattowatch/manage.py test watchApp
   # - coverage run --source='.' whattowatch/manage.py test chatApp
 
 after_success:
