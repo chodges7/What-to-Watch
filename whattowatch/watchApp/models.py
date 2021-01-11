@@ -1,14 +1,18 @@
 from django.db import models
-from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import ugettext_lazy as _
 
-class Profile(models.Model):
-    profile_fname = models.CharField(max_length=50)
-    profile_lname = models.CharField(max_length=50)
-    profile_bio = models.CharField(max_length=500)
-    profile_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to='watch/static/profile-pics',
-        default='watch/static/LogoColor.png', null=True, blank=True)
+from .managers import CustomUserManager
+
+# from https://testdriven.io/blog/django-custom-user-model/
+class CustomUser(AbstractUser):
+    username = None
+    email = models.EmailField(_('email address'), unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
 
     def __str__(self):
-        name = "Profile:" + self.profile_fname + " " + self.profile_lname
-        return name
+        return self.email
