@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row text-right">
+  <div class="col-4 mt-5"></div>
+
+  <div class="col-4 mt-5 p-5 text-left bg-white">
+    <form method="POST" enctype='multipart/form-data'>
+      {% csrf_token %}
+      <h4 class="text-center">Register your user</h4>
+      <!--{{ form }}-->
+      {{ form.errors }}
+      {{ form.username.label_tag }}
+      {{ form.username }} <br>
+      {{ form.email.label_tag }}
+      {{ form.email }} <br>
+      {{ form.password1.label_tag }}
+      {{ form.password1 }} <br>
+      {{ form.password2.label_tag }}
+      {{ form.password2 }} <br>
+      <h4 class="text-center">Register your profile</h4>
+      {{ form.profile_image.label_tag }} (this is optional)
+      {{ form.profile_image }}
+      {{ form.profile_fname.label_tag }}
+      {{ form.profile_fname }} <br>
+      {{ form.profile_lname.label_tag }}
+      {{ form.profile_lname }} <br>
+      {{ form.profile_bio.label_tag }}
+      {{ form.profile_bio }} <br>
+      <input type="submit" class="button expanded" value="Register" />
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block search %}
+<form method="post">
+  {% csrf_token %}
+  <div class="nav-link">
+    {{ form_search.search_field.label }}
+    {{ form_search.search_field }}
+    {{ form_search.errors }}
+  </div>
+  <input type="submit"  value="Search" class="form-control btn btn-info">
+</form>
+{% endblock %}
+
+{% block content %}
+<body class="" style="background-image: url('https://bestofsno.com/wp-content/uploads/2019/11/IMG_5463-900x600.jpg');">
+  <div class="grid-x">
+    <div class="card">
+      <h4>{{ movie.title }}</h4>
+      <div class="card-section">
+        <img src="{{ cover }}" width="300" alt="The cover to {{ movie.title }}">
+        <h3>
+          Directed by:
+          {% for dir in movie.director %}
+          {% if forloop.last %} {{ dir }}
+          {% else %} {{ dir }},
+          {% endif %}
+          {% empty %} <i> not found </i>{% endfor %}
+        </h3>
+
+        <!--  -->
+
+        <a href="/home/">Back to the homepage</a></br>
+
+        <!--  -->
+
+        <b>Released in {{ movie.year }} </b> |
+
+        <!--  -->
+
+        <b>Reviewed at {{ movie.rating }} out of 10</b></br>
+
+        <!--  -->
+
+        <b>Starring:</b>
+        {% for star in movie.cast %}
+        {% if forloop.counter < 11 %}
+        {% if forloop.last or forloop.counter == 10 %} {{ star }}
+        {% else %} {{ star }},
+        {% endif %} {% endif %}
+        {% empty %} <i> not found </i>
+        {% endfor %} </br>
+
+        <!--  -->
+
+        <b>Written by:</b>
+        {% for writer in movie.writer %}
+        {% if forloop.counter < 6 %}
+        {% if forloop.last or forloop.counter == 5 %} {{ writer }}
+        {% else %} {{ writer }},
+        {% endif %} {% endif %}
+        {% empty %} <i> not found </i>
+        {% endfor %} </br>
+
+        <!--  -->
+
+        <b>Synopses: </b>
+        {% for value in movie.plot %}
+        {% if forloop.counter < 4 %}
+        {% if forloop.last or forloop.counter == 3 %} {{ value }}
+        {% else %}{{ value }} </br></br>
+        {% endif %} {% endif %}
+        {% empty %} <i> not found </i>
+        {% endfor %}</br>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

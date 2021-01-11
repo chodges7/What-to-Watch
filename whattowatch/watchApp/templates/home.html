@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block search %}
+<form method="post">
+  {% csrf_token %}
+  <div class="nav-link">
+    {{ form_search.search_field.label }}
+    {{ form_search.search_field }}
+    {{ form_search.errors }}
+  </div>
+  <input type="submit"  value="Search" class="form-control btn btn-info">
+</form>
+{% endblock %}
+
+{% block content %}
+<body class="" style="background-image: url('https://bestofsno.com/wp-content/uploads/2019/11/IMG_5463-900x600.jpg');">
+  <div class="card">
+    <h2>Top Movies in IMDb that you should watch!</h2>
+  </div>
+  {% for movie in movies %}
+  <div class="card" style="width: 300px;">
+    <div class="card-divider">
+      <h4>{{ forloop.counter }}) {{ movie.title }}</h4>
+    </div>
+    <div class="card-section">
+      Released in {{ movie.year }} </br>
+      Reviewed at {{ movie.rating }} out of 10</br>
+      <a href="/movie/{{ movie.movieID }}/">The movie's page</a>
+    </div>
+  </div>
+  {% endfor %}
+  {% endblock %}
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  {% block scripts %}
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  {% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div>
+  {% if user.is_authenticated %}
+  <h3 class="text-center">{{ body }}</h3>
+  <div class="grid-x medium-offset-2 small-offset-2 large-offset-2">
+    <div class="large-9 medium-9 small-9 cell">
+      <div class="card secondary grid-padding-x">
+        <div class="card-section">
+          <h4><u>Your picture:</u></h4>
+          {% if profile_picture %}
+          <img src="{{ profile_picture.url }}" width="200" alt="Your profile picture!"/>
+          {% else %}
+          <img src="{% static "LogoColor.png" %}" width="200" alt="Your profile picture!"/>
+          {% endif %}
+          <div id="app-2">
+            <button class="button" v-on:click="show = !show">
+              Click here to upload a new profile picture
+            </button>
+            <transition name="fade">
+              <form action="/profilePage/" method="post" enctype='multipart/form-data' v-if="show">
+                {% csrf_token %}
+                <h5 class="text-center">Upload your new picture here:</h5>
+                {{ form_picture }}
+                <input type="submit" class="button" value="Edit" />
+              </form>
+            </transition>
+          </p>
+        </div>
+        <h4><u>Your bio:</u></h4>
+        <h5>{{ bio }}</h5><p>
+          <div id="app-3">
+            <button class="button" v-on:click="show = !show">
+              Click here to edit your profile
+            </button>
+            <transition name="fade">
+              <form action="/profilePage/" method="post" v-if="show">
+                {% csrf_token %}
+                <h5 class="text-center">Type your new bio here:</h5>
+                {{ form }}
+                <input type="submit" class="button" value="Edit" />
+              </form>
+            </transition>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="{% static "js/myvue.js" %}"></script>
+{% endblock %}
