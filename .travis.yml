@@ -9,7 +9,7 @@ script:
   - python -V
   - pylint --load-plugins pylint_django --disable=missing-docstring ./whattowatch/whattowatch
     # Run tests
-  - coverage run --source=watch manage.py test
+  - coverage run --source=whattowatch manage.py test
 
 # after_success:
 #   coveralls
