@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
     username = None
     bio = models.CharField(max_length=500)
     image = models.ImageField(default='LogoColor.png', null=True, blank=True,
-    upload_to='whattowatch/watch_app/static/profile-pic')
+    upload_to='profile-pics')
     email = models.EmailField(_('email address'), unique=True)
 
     USERNAME_FIELD = 'email'

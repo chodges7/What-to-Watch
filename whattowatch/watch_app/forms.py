@@ -16,7 +16,8 @@ class PictureForm(forms.Form):
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = models.CustomUser
-        fields = ('email', 'password1', 'password2', 'bio', 'image')
+        fields = ('email', 'password1', 'password2', 'first_name', 'last_name',
+        'bio', 'image')
 
 # class from https://testdriven.io/blog/django-custom-user-model/
 class CustomUserChangeForm(UserChangeForm):
