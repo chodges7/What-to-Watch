@@ -6,11 +6,6 @@ from imdb import IMDb
 from . import models
 from . import forms
 
-@login_required(login_url="/login/")
-def blank(request):
-    return redirect("/home/")
-
-@login_required(login_url="/login/")
 def home(request):
     # Get top movies
     movies_data = IMDb()
@@ -34,7 +29,6 @@ def home(request):
     }
     return render(request,'home.html', context=context)
 
-@login_required(login_url="/login/")
 def specific_movie(request, movie_id):
     #Grab movie in database from person argument
     movies_data = IMDb()
@@ -122,12 +116,12 @@ def logout_view(request):
 
 def signup(request):
     if request.method == "POST":
-        form_instance = forms.RegistrationForm(request.POST, request.FILES)
+        form_instance = forms.CustomUserCreationForm(request.POST, request.FILES)
         if form_instance.is_valid():
             form_instance.save()
             return redirect("/")
     else:
-        form_instance = forms.RegistrationForm()
+        form_instance = forms.CustomUserCreationForm()
     context = {
         "form":form_instance,
         "title":"WTW Register",

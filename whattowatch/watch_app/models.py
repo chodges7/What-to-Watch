@@ -8,6 +8,9 @@ from .managers import CustomUserManager
 # from https://testdriven.io/blog/django-custom-user-model/
 class CustomUser(AbstractUser):
     username = None
+    bio = models.CharField(max_length=500)
+    image = models.ImageField(default='LogoColor.png', null=True, blank=True,
+    upload_to='whattowatch/watch_app/static/profile-pic')
     email = models.EmailField(_('email address'), unique=True)
 
     USERNAME_FIELD = 'email'
@@ -17,12 +20,3 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
-
-class Profile(models.Model):
-    profile_bio = models.CharField(max_length=500)
-    profile_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to='watch/static/profile-pics',
-        default='LogoColor.png', null=True, blank=True)
-
-    def __str__(self):
-        return profile_user
