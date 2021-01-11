@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class WatchappConfig(AppConfig):
-    name = 'watchApp'
+    name = 'watch_app'

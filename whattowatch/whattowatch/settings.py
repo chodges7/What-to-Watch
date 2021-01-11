@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'watchApp',
-    'chatApp',
+    'watch_app',
+    'chat_app',
 ]
 
 MIDDLEWARE = [
@@ -126,4 +126,4 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-AUTH_USER_MODEL = 'watchApp.CustomUser'
+AUTH_USER_MODEL = 'watch_app.CustomUser'
