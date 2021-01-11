@@ -13,5 +13,5 @@ script:
   # - coverage run --source='.' whattowatch/manage.py test watchApp
   # - coverage run --source='.' whattowatch/manage.py test chatApp
 
-# after_success:
-#   coveralls
+after_success:
+  coveralls
