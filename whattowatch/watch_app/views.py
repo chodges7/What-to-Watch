@@ -5,6 +5,11 @@ from django.contrib.auth.decorators import login_required
 from imdb import IMDb
 from . import forms
 
+def blank(request):
+    # this redirects to the homepage to not deal with the hastle of using
+    # weird href links
+    return redirect("homepage")
+
 def home(request):
     # Get top movies
     movies_data = IMDb()
@@ -74,7 +79,7 @@ def profile_view(request):
     if request.method == "POST" and not form.is_valid():
         form_picture = forms.PictureForm(request.POST, request.FILES)
         if form_picture.is_valid():
-            prof.image = form_picture.cleaned_data["profile_image"]
+            prof.image = form_picture.cleaned_data["image"]
             prof.save()
             form_picture = forms.PictureForm()
             return redirect('/profilePage/')

@@ -240,3 +240,6 @@ PetBook.json
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Don't save the uploaded profile-pics to the git repo
+whattowatch/media/profile-pics/*
