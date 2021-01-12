@@ -8,10 +8,10 @@ from . import views
 
 urlpatterns = [
         path('', views.home, name="homepage"),
-        path('home/', views.blank, name="homepage redirect"),
-        path('login/', views.login_view, name="login"),
         path('signup/', views.signup, name="signup"),
+        path('login/', views.login_view, name="login"),
         path('logout/', views.logout_view, name="logout"),
+        path('home/', views.blank, name="homepage redirect"),
         path('profilePage/', views.profile_view, name="profile"),
         path('movie/<slug:movie_id>/', views.specific_movie, name="moviePage"),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

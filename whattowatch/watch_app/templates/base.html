@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title}}</title>
-  <link rel="stylesheet" href="{% static 'foundation/css/foundation.css' %}">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{% static 'css/foundation.css' %}" />
   {% block css %}
   {% endblock %}
 </head>
@@ -20,11 +20,11 @@
     <div class="top-bar-right">
       <ul class="menu">
         {% if user.is_authenticated %}
-        <li><a href="/profile_page/">{{ user.username }}</a></li>
+        <li><a href="/profilePage/">{{ user.first_name }} {{ user.last_name }}</a></li>
         <li><a href="/home/">Homepage</a></li>
         <li><a href="/logout/">Logout</a></li>
         {% else %}
-        <li><a href="/login/">Log In</a></li>
+        <li><a href="/login/">Login</a></li>
         {% endif %}
       </ul>
     </div>
@@ -32,11 +32,12 @@
 
   {% block content %}
   {% endblock %}
-  <script src="{% static 'foundation/js/vendor/jquery.js' %}"></script>
-  <script src="{% static 'foundation/js/vendor/what-input.js' %}"></script>
-  <script src="{% static 'foundation/js/vendor/foundation.min.js' %}"></script>
+
+  <script src="{% static 'js/vendor/jquery.js' %}"></script>
+  <script src="{% static 'js/vendor/what-input.js' %}"></script>
+  <script src="{% static 'js/vendor/foundation.min.js' %}"></script>
   <script>
-  $(document).foundation();
+    $(document).foundation();
   </script>
   {% block scripts %}
   {% endblock %}
