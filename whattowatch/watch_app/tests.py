@@ -6,7 +6,7 @@ class TestURLs(TestCase):
     def test_math(self):
         self.assertEqual(1+1, 2)
 
-# from https://testdriven.io/blog/django-custom-user-model/
+# test from https://testdriven.io/blog/django-custom-user-model/
 class UsersManagersTests(TestCase):
 
     def test_create_user(self):
