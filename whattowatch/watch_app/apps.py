@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class Watch_appConfig(AppConfig):
+class WatchappConfig(AppConfig):
     name = 'watch_app'

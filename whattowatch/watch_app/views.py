@@ -9,7 +9,7 @@ from . import forms
 from . import models
 
 
-class movie_view(generics.ListAPIView):
+class MovieView(generics.ListAPIView):
     queryset = models.Movie.objects.all()
     serializer_class = MovieSerializer
 

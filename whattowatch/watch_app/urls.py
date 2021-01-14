@@ -7,7 +7,7 @@ from . import views
 
 
 urlpatterns = [
-        path('movieView/', views.movie_view.as_view()),
+        path('movieView/', views.MovieView.as_view()),
 
         path('', views.home, name="homepage"),
         path('signup/', views.signup, name="signup"),
