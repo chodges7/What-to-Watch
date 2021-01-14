@@ -19,3 +19,14 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+class Movie(models.Model):
+    title = models.CharField(null=False, max_length=50)
+    rotten_tomatos = models.FloatField(blank=True)
+    hulu_url = models.CharField(blank=True, max_length=100)
+    amazon_url = models.CharField(blank=True, max_length=100)
+    hbo_max_url = models.CharField(blank=True, max_length=100)
+    netflix_url = models.CharField(blank=True, max_length=100)
+
+    def __str__(self):
+        return self.title
