@@ -2,8 +2,17 @@ from django.contrib.auth import login, logout
 from django.shortcuts import render , redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from rest_framework import generics
 from imdb import IMDb
+from .serializers import MovieSerializer
 from . import forms
+from . import models
+
+
+class movie_view(generics.ListAPIView):
+    queryset = models.Movie.objects.all()
+    serializer_class = MovieSerializer
+
 
 def blank(request):
     # this redirects to the homepage to not deal with the hastle of using
