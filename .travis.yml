@@ -9,6 +9,7 @@ script:
   - python -V
   - pylint --load-plugins pylint_django --disable=missing-docstring ./whattowatch/whattowatch
   - pylint --load-plugins pylint_django --disable=missing-docstring ./whattowatch/watch_app
+  - pylint --load-plugins pylint_django --disable=missing-docstring ./whattowatch/front_end
   - pylint --load-plugins pylint_django --disable=missing-docstring ./whattowatch/chat_app
 
     # Run tests

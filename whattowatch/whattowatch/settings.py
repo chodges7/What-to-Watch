@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'watch_app.apps.WatchappConfig',
     'chat_app.apps.ChatappConfig',
+    'front_end.apps.FrontEndConfig',
     'rest_framework',
 ]
 
