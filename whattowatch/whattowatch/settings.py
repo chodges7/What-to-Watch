@@ -124,7 +124,7 @@ USE_TZ = True
 
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = os.path.join(BASE_DIR, "front_end/media")
+STATIC_ROOT = os.path.join(BASE_DIR, "front_end/static")
 
 AUTH_USER_MODEL = 'watch_app.CustomUser'

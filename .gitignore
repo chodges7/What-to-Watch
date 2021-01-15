@@ -242,4 +242,4 @@ Temporary Items
 .apdisk
 
 # Don't save the uploaded profile-pics to the git repo
-whattowatch/media/profile-pics/*
+whattowatch/watch_app/media/profile-pics
