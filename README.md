@@ -12,4 +12,4 @@ What to Watch is a webstite that links with streaming websites to be a one-stop 
 ## Dependancies that this project uses need:
 * Django
 * Docker
-* see requirements.txt
+* see requirements.txt and shrinkwrap.json in front_end app

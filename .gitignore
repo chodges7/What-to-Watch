@@ -243,3 +243,6 @@ Temporary Items
 
 # Don't save the uploaded profile-pics to the git repo
 whattowatch/front_end/media/profile-pics
+
+# Don't save all the files for the npm modules
+whattowatch/front_end/node_modules
