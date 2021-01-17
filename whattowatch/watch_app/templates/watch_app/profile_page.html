@@ -20,7 +20,7 @@
               Click here to upload a new profile picture
             </button>
             <transition name="fade">
-              <form action="/profilePage/" method="post" enctype='multipart/form-data' v-if="show">
+              <form action="/api/profilePage/" method="post" enctype='multipart/form-data' v-if="show">
                 {% csrf_token %}
                 <h5 class="text-center">Upload your new picture here:</h5>
                 {{ form_picture }}
@@ -36,7 +36,7 @@
               Click here to edit your profile
             </button>
             <transition name="fade">
-              <form action="/profilePage/" method="post" v-if="show">
+              <form action="/api/profilePage/" method="post" v-if="show">
                 {% csrf_token %}
                 <h5 class="text-center">Type your new bio here:</h5>
                 {{ form }}

@@ -1,0 +1,33 @@
+{% load static %}
+{% get_media_prefix %}
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{% static 'css/foundation.css' %}" />
+  {% block css %}
+  {% endblock %}
+</head>
+<body>
+  <li class="menu-text">What to Watch</li>
+  <ul class="menu">
+    {% if user.is_authenticated %}
+    <li><a href="/api/profilePage/">{{ user.first_name }} {{ user.last_name }}</a></li>
+    <li><a href="/api/home/">Homepage</a></li>
+    <li><a href="/api/logout/">Logout</a></li>
+    {% else %}
+    <li><a href="/api/login/">Login</a></li>
+    {% endif %}
+  </ul>
+
+  {% block content %}
+  {% endblock %}
+
+  <script src="{% static 'js/vendor/jquery.js' %}"></script>
+  {% block scripts %}
+  {% endblock %}
+</body>
+</html>
