@@ -1,5 +1,4 @@
 {% load static %}
-{% get_media_prefix %}
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
@@ -20,7 +19,10 @@
     <li><a href="/api/logout/">Logout</a></li>
     {% else %}
     <li><a href="/api/login/">Login</a></li>
+    <li><a href="/api/signup/">Signup</a></li>
     {% endif %}
+    {% block search %}
+    {% endblock %}
   </ul>
 
   {% block content %}

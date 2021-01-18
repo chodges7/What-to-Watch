@@ -29,7 +29,7 @@ def home(request):
         if form_search.is_valid():
             search = movies_data.search_movie(form_search.cleaned_data["search_field"])
             top_movie_id = search[0].getID()
-            new_url = "/movie/" + top_movie_id + "/"
+            new_url = "/api/movie/" + top_movie_id + "/"
             form_search = forms.SearchForm()
             return redirect(new_url)
     else:
@@ -40,7 +40,7 @@ def home(request):
         "title":'WTW Home',
         "movies":top,
     }
-    return render(request,'home.html', context=context)
+    return render(request,'watch_app/home.html', context=context)
 
 def specific_movie(request, movie_id):
     #Grab movie in database from person argument
@@ -55,7 +55,7 @@ def specific_movie(request, movie_id):
             print(search)
             print(search[0].keys())
             top_movie_id = search[0].getID()
-            new_url = "/movie/" + top_movie_id + "/"
+            new_url = "/api/movie/" + top_movie_id + "/"
             form_search = forms.SearchForm()
             return redirect(new_url)
     else:
@@ -67,9 +67,9 @@ def specific_movie(request, movie_id):
         "title":movie['title'],
         "movie":movie,
         }
-    return render(request, "specific_movie.html", context=context)
+    return render(request, "watch_app/specific_movie.html", context=context)
 
-@login_required(login_url="/login/")
+@login_required(login_url="login")
 def profile_view(request):
     prof = request.user
     welc = "Welcome to your profile page: "
@@ -77,33 +77,32 @@ def profile_view(request):
 
     # FORMS for this page
     if request.method == "POST":
-        form = forms.BioForm(request.POST)
-        if form.is_valid():
-            prof.bio = form.cleaned_data["bio"]
+        form_bio = forms.BioForm(request.POST)
+        if form_bio.is_valid():
+            prof.bio = form_bio.cleaned_data["bio"]
             prof.save()
-            form = forms.BioForm()
-            return redirect('/profilePage/')
+            form_bio = forms.BioForm()
+            return redirect('/api/profilePage/')
     else:
-        form = forms.BioForm()
-    if request.method == "POST" and not form.is_valid():
+        form_bio = forms.BioForm()
+    if request.method == "POST" and not form_bio.is_valid():
         form_picture = forms.PictureForm(request.POST, request.FILES)
         if form_picture.is_valid():
             prof.image = form_picture.cleaned_data["image"]
             prof.save()
             form_picture = forms.PictureForm()
-            return redirect('/profilePage/')
+            return redirect('/api/profilePage/')
     else:
         form_picture = forms.PictureForm()
 
     context = {
         "body":welc,
-        "form":form,
+        "form_bio":form_bio,
         "form_picture":form_picture,
         "title":"WTW Profile",
-        "bio":prof.bio,
-        "profile_picture":prof.image,
+        "prof":prof,
     }
-    return render(request, "profile_page.html", context=context)
+    return render(request, "watch_app/profile_page.html", context=context)
 
 def login_view(request):
     # Authentication works
@@ -112,7 +111,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('/')
+            return redirect("homepage")
     else:
         form = AuthenticationForm()
 
@@ -120,23 +119,23 @@ def login_view(request):
         "form":form,
         "title":"WTW Login",
     }
-    return render(request,'login.html', context=context)
+    return render(request,'watch_app/login.html', context=context)
 
-@login_required(login_url="/login/")
+@login_required(login_url="login")
 def logout_view(request):
     logout(request)
-    return redirect("/")
+    return redirect("homepage")
 
 def signup(request):
     if request.method == "POST":
         form_instance = forms.CustomUserCreationForm(request.POST, request.FILES)
         if form_instance.is_valid():
             form_instance.save()
-            return redirect("/login/")
+            return redirect("login")
     else:
         form_instance = forms.CustomUserCreationForm()
     context = {
         "form":form_instance,
         "title":"WTW Register",
         }
-    return render(request, "signup.html", context=context)
+    return render(request, "watch_app/signup.html", context=context)

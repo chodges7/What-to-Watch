@@ -1,21 +1,16 @@
-{% extends "base.html" %}
+{% extends "watch_app/base.html" %}
 {% load static %}
 
 {% block content %}
-<div class="row text-right">
-  <div class="col-4 mt-5"></div>
+<form method="post" action="/api/login/">
 
-  <div class="col-4 mt-5 p-5 text-left bg-white">
-    <form method="post" action="/login/">
+  {% csrf_token %}
+  {{ form.username.label }} <br>
+  {{ form.username }} <br> <br>
+  {{ form.password.label }} <br>
+  {{ form.password }} <br> <br>
+  {{ form.errors }}
 
-      {% csrf_token %}
-      {{ form.username.label }}
-      {{ form.username }} <br> <br>
-      {{ form.password.label }}
-      {{ form.password }} <br>
-      {{ form.errors }} <br>
-      <input type="submit"  value="Login" class="form-control btn btn-info">
-    </div>
-    </div>
-  </form>
+  <input type="submit"  value="Login" />
+</form>
 {% endblock %}

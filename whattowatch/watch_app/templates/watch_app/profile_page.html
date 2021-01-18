@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "watch_app/base.html" %}
 {% load static %}
 
 {% block content %}
@@ -10,10 +10,10 @@
       <div class="card secondary grid-padding-x">
         <div class="card-section">
           <h4><u>Your picture:</u></h4>
-          {% if profile_picture %}
-          <img src="{{ profile_picture.url }}" width="200" alt="Your profile picture!"/>
+          {% if prof.image.url %}
+          <img src="{{ prof.image.url }}" width="200" alt="Your profile picture!"/>
           {% else %}
-          <img src="{% static "LogoColor.png" %}" width="200" alt="Your profile picture!"/>
+          <img src="{% static "images/defaultProfilePicture.png" %}" width="200" alt="Your profile picture!"/>
           {% endif %}
           <div id="app-2">
             <button class="button" v-on:click="show = !show">
@@ -30,7 +30,7 @@
           </p>
         </div>
         <h4><u>Your bio:</u></h4>
-        <h5>{{ bio }}</h5><p>
+        <h5>{{ prof.bio }}</h5><p>
           <div id="app-3">
             <button class="button" v-on:click="show = !show">
               Click here to edit your profile
@@ -39,7 +39,7 @@
               <form action="/api/profilePage/" method="post" v-if="show">
                 {% csrf_token %}
                 <h5 class="text-center">Type your new bio here:</h5>
-                {{ form }}
+                {{ form_bio }}
                 <input type="submit" class="button" value="Edit" />
               </form>
             </transition>

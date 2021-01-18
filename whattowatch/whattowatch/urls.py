@@ -16,9 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# These two imports are part of the lower comment
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('front_end.urls')),
     path('api/', include('watch_app.urls')),
     path('chat/', include('chat_app.urls')),
 ]
+
+# This shouldn't be what we do during production. The static files should be
+# hosted on AWS or whatever we choose to use.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
