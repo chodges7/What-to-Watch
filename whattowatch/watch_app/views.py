@@ -1,4 +1,4 @@
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render , redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -88,7 +88,7 @@ def profile_view(request):
     if request.method == "POST" and not form_bio.is_valid():
         form_picture = forms.PictureForm(request.POST, request.FILES)
         if form_picture.is_valid():
-            prof.image = form_picture.cleaned_data["image"]
+            prof.profile_picture = form_picture.cleaned_data["profile_picture"]
             prof.save()
             form_picture = forms.PictureForm()
             return redirect('/api/profilePage/')
@@ -130,8 +130,11 @@ def signup(request):
     if request.method == "POST":
         form_instance = forms.CustomUserCreationForm(request.POST, request.FILES)
         if form_instance.is_valid():
-            form_instance.save()
-            return redirect("login")
+            new_user = form_instance.save()
+            new_user = authenticate(username=form_instance.cleaned_data["email"],
+                                    password=form_instance.cleaned_data["password1"])
+            login(request, new_user)
+            return redirect("homepage")
     else:
         form_instance = forms.CustomUserCreationForm()
     context = {

@@ -8,7 +8,7 @@ from .managers import CustomUserManager
 class CustomUser(AbstractUser):
     username = None
     bio = models.CharField(max_length=500)
-    image = models.ImageField(default='LogoColor.png', null=True, blank=True,
+    profile_picture = models.ImageField(default='LogoColor.png', null=True, blank=True,
     upload_to='profile-pics')
     email = models.EmailField(_('email address'), unique=True)
 

@@ -10,8 +10,8 @@
       <div class="card secondary grid-padding-x">
         <div class="card-section">
           <h4><u>Your picture:</u></h4>
-          {% if prof.image.url %}
-          <img src="{{ prof.image.url }}" width="200" alt="Your profile picture!"/>
+          {% if prof.profile_picture.url %}
+          <img src="{{ prof.profile_picture.url }}" width="200" alt="Your profile picture!"/>
           {% else %}
           <img src="{% static "images/defaultProfilePicture.png" %}" width="200" alt="Your profile picture!"/>
           {% endif %}

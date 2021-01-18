@@ -10,14 +10,14 @@ class BioForm(forms.Form):
     bio = forms.CharField(label='Your new Bio', max_length=500)
 
 class PictureForm(forms.Form):
-    image = forms.ImageField(label='Your new picture')
+    profile_picture = forms.ImageField(label='Your new picture')
 
 # class from https://testdriven.io/blog/django-custom-user-model/
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = models.CustomUser
         fields = ('email', 'password1', 'password2', 'first_name', 'last_name',
-        'bio', 'image')
+        'bio', 'profile_picture')
 
 # class from https://testdriven.io/blog/django-custom-user-model/
 class CustomUserChangeForm(UserChangeForm):
