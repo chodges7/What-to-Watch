@@ -2,16 +2,49 @@ from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render , redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from imdb import IMDb
-from .serializers import MovieSerializer
+from . import serializers
 from . import forms
 from . import models
 
 
 class MovieView(generics.ListAPIView):
     queryset = models.Movie.objects.all()
-    serializer_class = MovieSerializer
+    serializer_class = serializers.MovieSerializer
+
+class AddMovieView(APIView):
+    serializer_class = serializers.AddMovieSerializer
+
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            title = serializer.data.get('title')
+            rotten_tomatos = serializer.data.get('rotten_tomatos') # TESTING
+            # If I had an api to find the urls for amazon, netflix, etc
+            # I would put them here as:
+            # amazon_url = APII'mUsing(movieTitle)
+
+            # This if statement checks to see if a movie with that title already
+            # exists in the database and just updates the fields of it
+            queryset = models.Movie.objects.filter(title=title)
+            if queryset.exists():
+                movie = queryset[0]
+                movie.title = title
+                movie.set_movie_id()
+                movie.rotten_tomatos = rotten_tomatos # TESTING
+                # existingMovie.amazon_url = APII'mUsing(movieTitle) ...
+                movie.save(update_fields=['title',])
+            else:
+                movie = models.Movie(title=title, rotten_tomatos=rotten_tomatos)
+                movie.set_movie_id()
+                movie.save()
+
+            return Response(serializers.MovieSerializer(movie).data, status=status.HTTP_201_CREATED)
+        return Response(serializers.MovieSerializer(), status=status.HTTP_400_BAD_REQUEST)
+
 
 
 def blank(request):

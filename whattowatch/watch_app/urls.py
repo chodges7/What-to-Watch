@@ -8,6 +8,7 @@ from . import views
 
 urlpatterns = [
         path('movieView/', views.MovieView.as_view()),
+        path('addmovieView/', views.AddMovieView.as_view()),
 
         path('', views.home, name="homepage"),
         path('signup/', views.signup, name="signup"),
