@@ -18,7 +18,7 @@ class MovieView(generics.ListAPIView):
 class AddMovieView(APIView):
     serializer_class = serializers.AddMovieSerializer
 
-    def post(self, request, format=None):
+    def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             title = serializer.data.get('title')
@@ -32,18 +32,17 @@ class AddMovieView(APIView):
             queryset = models.Movie.objects.filter(title=title)
             if queryset.exists():
                 movie = queryset[0]
-                movie.title = title
                 movie.set_movie_id()
                 movie.rotten_tomatos = rotten_tomatos # TESTING
-                # existingMovie.amazon_url = APII'mUsing(movieTitle) ...
-                movie.save(update_fields=['title',])
+                # existingMovie.amazon_url = API_I'm_Using(movieTitle) ...
+                movie.save(update_fields=['rotten_tomatos',])
             else:
                 movie = models.Movie(title=title, rotten_tomatos=rotten_tomatos)
                 movie.set_movie_id()
                 movie.save()
 
             return Response(serializers.MovieSerializer(movie).data, status=status.HTTP_201_CREATED)
-        return Response(serializers.MovieSerializer(), status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializers.MovieSerializer().data, status=status.HTTP_400_BAD_REQUEST)
 
 
 

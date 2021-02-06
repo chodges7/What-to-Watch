@@ -30,7 +30,7 @@ class Movie(models.Model):
     netflix_url = models.CharField(blank=True, max_length=100)
     movie_id = models.IntegerField(null=False)
 
-    def set_movie_id(self, *args, **kwargs):
+    def set_movie_id(self):
         movies_data = IMDb()
         search = movies_data.search_movie(self.title)
         self.movie_id = search[0].getID()
